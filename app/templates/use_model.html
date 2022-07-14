@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use our model</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/plugins/fontawesome/css/all.css">
+  
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body class='bg-dark'>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/theme.js')}}"></script>
+    <section class="">
+        <div class="d-flex justify-content-center align-items-center">
+            <div style='display: grid; grid-template-rows: minmax(0px, 128px) auto auto; grid-template-columns: 1fr 1fr; grid-gap: 1rem; grid-template-areas: "nav nav nav" "left info right"'>
+                <div class="" style="grid-area: nav;">
+                    <nav class="navbar navbar-expand-lg navbar-dark fixed-top site-navigation main-nav navbar-togglable" style="z-index: 0;">
+                        <div class="container">
+                            <a class="navbar-brand" href="#">
+                                <img src="{{ url_for('static', filename='images/ai-camp-logo-128x128.png')}}" width="55" height="55" alt="">
+                              </a>
+                            <a class="navbar-brand pr-2" href="#">
+                                <div>
+                                    <h3 class="text-center">Plant Diagnosis and</h3>
+                                    <h3 class="text-center">Detection AI</h3>
+                                </div>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+                                <span class="fa fa-bars"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarCollapse">
+                                <ul class="navbar-nav row">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#home" id="navbarWelcome" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Links
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarWelcome">
+                                                 <a class="dropdown-item " target="_blank" href="https://github.com/zikegcwk/aicamp_emotion">
+                                                    Github Repo
+                                              </a>
+                                                <a class="dropdown-item " target="_blank" href="">
+                                                    Model Slideshow
+                                                </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="/#home" class="nav-link">
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="/#demo" class="nav-link">
+                                                Try Our Model Here
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="/#meet_the_team" class="nav-link">
+                                                About the Team
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="/#our_work" class="nav-link">
+                                                Work Process
+                                            </a>
+                                        </li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div style='grid-area: left; display: grid; grid-template-rows: auto auto; grid-gap: 1rem; grid-template-areas: "button" "info"'>
+                    <div id="button" class="d-flex justify-content-center" style="grid-area: button; align-items: center;">
+                        <a class="w-100" id='seefood_button'>
+                            <form id='seefood_form' method=post enctype=multipart/form-data>
+                                <input id="seefood_input_step" name="step" type="text" value="{{ step }}" hidden/>
+                                <input id="seefood_input_step" name="detected_plant" type="text" value="{{ detected_plant }}" hidden/>
+                                <input id="seefood_input_step" name="plant_confidence" type="text" value="{{ plant_confidence}}" hidden/>
+                                <input id="seefood_input_step" name="detected_disease" type="text" value="{{ detected_disease }}" hidden/>
+                                <input id="seefood_input_step" name="disease_confidence" type="text" value="{{ disease_confidence}}" hidden/>
+                                <input id="seefood_input_step" name="plant_filename" type="text" value="{{ plant_filename }}" hidden/>
+                                <input id="seefood_input_step" name="disease_filename" type="text" value="{{ disease_filename }}" hidden/>
+                                <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
+                            </form>
+                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
+                                {% if step == "finish" %}
+                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Reset
+                                {% else %}
+                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Upload Picture of {{ "Plant" if step == "plant" else "Disease" }}
+                                {% endif %}
+                            </button>
+                        </a>
+                    </div>
+                    <div id="info_text" class="" style="grid-area: info;">
+                        <div class='bg-secondary rounded-lg w-100 h-100 p-4'>
+                            <p class="" style="font-size: 1.8em;">Detected Plant: {{ detected_plant }}</p>
+                            <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ plant_confidence }}</p>
+                            <p class="" style="font-size: 1.8em;">Detected Disease: {{ detected_disease }}</p>
+                            <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ disease_confidence }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div style='grid-area: right; display: grid; grid-template-rows: auto auto; grid-gap: 1rem; grid-template-areas: "plant" "disease"'>
+                    <div class="" style="grid-area: plant;">
+                        {% if not plant_filename == '' %}
+                        <!-- <p>{{ url_for('static', filename='uploads/' + plant_filename) }}</p> -->
+                        <img src="{{ url_for('static', filename='uploads/' + plant_filename) }}" width="256" height="256"/>
+                        {% endif %}
+                    </div>
+                    <div class="" style="grid-area: disease;">
+                        {% if not disease_filename == '' %}
+                        <!-- <p>{{ url_for('static', filename='uploads/' + disease_filename) }}</p> -->
+                        <img src="{{ url_for('static', filename='uploads/' + disease_filename) }}" width="256" height="256"/>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if not detected_disease == 'Not Detected Yet' %}
+                <div style='grid-area: info'>
+                    <div class='bg-secondary rounded-lg w-100 h-100 p-4'>
+                        <h3>Diagnosis Solution!</h3>
+                        {% if detected_disease == 'Early blight' %}
+                        <p>you got early blight!</p>
+                        <p>good job</p>
+                        <p>you win: </p>
+                        <p>a dead plant!</p>
+                        {% elif detected_disease == 'Late blight' %}
+                        <p>you got late blight!</p>
+                        <p>here is some additional info to take care of this disease!</p>
+                        {% elif detected_disease == 'Powdery mildew' %}
+                        <p>you got powdery mildew!</p>
+                        <p>here is some additional info to take care of this disease: </p>
+                        <a>https://www.almanac.com/pest/powdery-mildew#:~:text=Baking%20soda%20has%20been%20proved,is%20another%20effective%20home%20remedy.</a>
+                        <a>https://www.youtube.com/watch?v=yHBvz1vBd7A</a>
+                        <a>https://www.growingagreenerworld.com/controlling-or-eliminating-powdery-mildew/</a>
+                        {% elif detected_disease == 'Leaf curling' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Citrus greening' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Downy mildew' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Bacterial wilt' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Browning' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Exobasidium leaf spot' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Anthracnose' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Septoria leaf spot' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Leaf spot' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Leaf scorch' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Yellow rust' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Bacterial spot' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Wilting' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Tipburn' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Black rot' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Cedar rust' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Apple scab' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Tomato bacterial spot' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Shothole' %}
+                        <p>hello you got late blight</p>
+                        {% elif detected_disease == 'Isariopsis leaf spot' %}
+                        <p>hello you got late blight</p>
+                        {% else %}
+                        <p>We don't currently have a diagnosis for this disease!</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- <div class='container-fluid'>
+            <div class='row'>
+                <div class='col vh-100 m-4' style="display: grid; grid-template-rows: minmax(128px, 1fr)repeat(auto-fit, minmax(240));">
+                    <div style="grid-row: 1/1;">
+                        <nav class="navbar navbar-expand-lg navbar-dark fixed-top site-navigation main-nav navbar-togglable">
+                            <div class="container">
+                                <a class="navbar-brand" href="#">
+                                    <img src="{{ url_for('static', filename='images/ai-camp-logo-128x128.png')}}" width="55" height="55" alt="">
+                                  </a>
+                                <a class="navbar-brand pr-2" href="#">
+                                    <div>
+                                        <h3 class="text-center">Plant Diagnosis</h3>
+                                        <h3 class="text-center">Detection</h3>
+                                    </div>
+                                </a>
+                                <!-- Toggler --
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+                                    <span class="fa fa-bars"></span>
+                                </button>
+                                <!-- Collapse --
+                                <div class="collapse navbar-collapse" id="navbarCollapse">
+                                    <!-- Links --
+                                    <ul class="navbar-nav row">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#home" id="navbarWelcome" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Links
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarWelcome">
+                                                     <a class="dropdown-item " target="_blank" href="https://github.com/zikegcwk/aicamp_emotion">
+                                                        Github Repo
+                                                  </a>
+                                                    <a class="dropdown-item " target="_blank" href="">
+                                                        Model Slideshow
+                                                    </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a href="/#home" class="nav-link">
+                                                    Home
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a href="/#demo" class="nav-link">
+                                                    Try Our Model Here
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a href="/#meet_the_team" class="nav-link">
+                                                    About the Team
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a href="/#our_work" class="nav-link">
+                                                    Work Process
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    <!-- <ul class="ml-lg-auto list-unstyled m-0 nav-btn">
+                                        <li><a href="https://michaelzhang1.typeform.com/to/LWIfVW1H?typeform-source=www.ai-camp.org" target="_blank" class="btn btn-green btn-circled btn-two">Register for AI Camp</a></li>
+                                    </ul> --
+                                </div> <!-- / .navbar-collapse --
+                            </div> <!-- / .Container --
+                        </nav>
+                    </div>
+                    <div class="d-flex justify-content-center" style="grid-row: 2/2;">
+                        <a class="w-100" id='seefood_button'>
+                            <form id='seefood_form' method=post enctype=multipart/form-data>
+                                <input id="seefood_input_step" name="step" type="text" value="{{ step }}" hidden/>
+                                <input id="seefood_input_step" name="detected_plant" type="text" value="{{ detected_plant }}" hidden/>
+                                <input id="seefood_input_step" name="plant_confidence" type="text" value="{{ plant_confidence}}" hidden/>
+                                <input id="seefood_input_step" name="detected_disease" type="text" value="{{ detected_disease }}" hidden/>
+                                <input id="seefood_input_step" name="disease_confidence" type="text" value="{{ disease_confidence}}" hidden/>
+                                <input id="seefood_input_step" name="plant_filename" type="text" value="{{ plant_filename }}" hidden/>
+                                <input id="seefood_input_step" name="disease_filename" type="text" value="{{ disease_filename }}" hidden/>
+                                <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
+                            </form>
+                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
+                                {% if step == "finish" %}
+                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Reset
+                                {% else %}
+                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Upload Picture of {{ "Plant" if step == "plant" else "Disease" }}
+                                {% endif %}
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class='bg-secondary rounded-lg w-100 h-100 p-4' style="grid-row: 3/3;">
+                        <p class="" style="font-size: 1.8em;">Detected Plant: {{ detected_plant }}</p>
+                        <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ plant_confidence }}</p>
+                        <p class="" style="font-size: 1.8em;">Detected Disease: {{ detected_disease }}</p>
+                        <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ disease_confidence }}</p>
+                    </div>
+                </div>
+                <div class='col mx-4'>
+                    {% if not plant_filename == '' %}
+                    <img src="{{ url_for('static', filename='uploads/' + plant_filename) }}" />
+                    {% endif %}
+                    <div class="my-4"></div>
+                    {% if not disease_filename == '' %}
+                    <img src="{{ url_for('static', filename='uploads/' + disease_filename) }}" />
+                    {% endif %}
+                </div>
+            </div>
+        </div> -->
+    </section>
+    {% if step == "finish" %}
+    <script>
+        function openDialog() {
+            var notDetectedYet = 'Not%20Detected%20Yet'
+            window.location = window.location.href.split("?")[0] + "?step=plant&detected_plant={notDetectedYet}&plant_confidence={notDetectedYet}&detected_disease={notDetectedYet}&disease_confidence={notDetectedYet}".replaceAll("{notDetectedYet}", notDetectedYet) + "&plant_filename=&disease_filename="
+            // document.getElementById('seefood_input_field').click();
+        }
+    </script>
+    {% else %}
+    <script>
+        function openDialog() {
+            // window.location = window.location + "use-model"
+            document.getElementById('seefood_input_field').click();
+        }
+    </script>
+    {% endif %}
+    <script>
+        // document.onload = function(ev) {
+        // added to get upload with a button working
+        // document.documentElement.style.overflow = 'hidden';
+        document.getElementById('seefood_button').addEventListener('click', openDialog);
+
+        var error = "{{ error }}"
+        switch(error) {
+            case "FILE_EXT_NOT_VALID":
+                alert("That is not a valid file extension!")
+                break
+            case "NOT_FOUND":
+                alert("Nothing was detected in that image")
+                break
+        }
+        // }
+    </script>
+</body>
+</html>
