@@ -185,6 +185,10 @@ img {
 .we-found {
 	margin-top: 50px;
 }
+.btn-size {
+	
+	width:-webkit-fill-available;
+}
 .btn-results {
 	border-color: #000 !important;
 	margin-top: 13px;
