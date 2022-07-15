@@ -28,18 +28,18 @@ app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 model_id = torch.hub.load("ultralytics/yolov5", "custom", path = 'ident.pt', force_reload=True)
-model_toma = torch.hub.load("ultralytics/yolov5", "custom", path = 'toma.pt', force_reload=True)
-model_grape = torch.hub.load("ultralytics/yolov5", "custom", path = 'grape.pt', force_reload=True)
-model_apple = torch.hub.load("ultralytics/yolov5", "custom", path = 'apple.pt', force_reload=True)
-model_blue = torch.hub.load("ultralytics/yolov5", "custom", path = 'blueberry.pt', force_reload=True)
-# model_aloe =  torch.hub.load("ultralytics/yolov5", "custom", path = 'aloe.pt', force_reload=True)
-model_snake = torch.hub.load("ultralytics/yolov5", "custom", path = 'snake.pt', force_reload=True)
-model_orange = torch.hub.load("ultralytics/yolov5", "custom", path = 'orange.pt', force_reload=True)
-# model_squash = torch.hub.load("ultralytics/yolov5", "custom", path = 'squash.pt', force_reload=True)
-model_mango = torch.hub.load("ultralytics/yolov5", "custom", path = 'mango.pt', force_reload=True)
-model_stra_rasp =  torch.hub.load("ultralytics/yolov5", "custom", path = 'straw_rasp.pt', force_reload=True)
-model_pepper =  torch.hub.load("ultralytics/yolov5", "custom", path = 'pepper.pt', force_reload=True)
-model_peach = torch.hub.load("ultralytics/yolov5", "custom", path = 'peach.pt', force_reload=True)
+model_toma = torch.hub.load("ultralytics/yolov5", "custom", path = 'toma.pt', force_reload=True)                #
+model_grape = torch.hub.load("ultralytics/yolov5", "custom", path = 'grape.pt', force_reload=True)              #
+model_apple = torch.hub.load("ultralytics/yolov5", "custom", path = 'apple.pt', force_reload=True)              #
+model_blue = torch.hub.load("ultralytics/yolov5", "custom", path = 'blueberry.pt', force_reload=True)           #/
+# model_aloe =  torch.hub.load("ultralytics/yolov5", "custom", path = 'aloe.pt', force_reload=True)             #
+# model_snake = torch.hub.load("ultralytics/yolov5", "custom", path = 'snake.pt', force_reload=True)            #
+model_orange = torch.hub.load("ultralytics/yolov5", "custom", path = 'orange.pt', force_reload=True)            #
+# model_squash = torch.hub.load("ultralytics/yolov5", "custom", path = 'squash.pt', force_reload=True)          #
+model_mango = torch.hub.load("ultralytics/yolov5", "custom", path = 'mango.pt', force_reload=True)              #
+model_stra_rasp =  torch.hub.load("ultralytics/yolov5", "custom", path = 'straw_rasp.pt', force_reload=True)    #/
+model_pepper =  torch.hub.load("ultralytics/yolov5", "custom", path = 'pepper.pt', force_reload=True)           #/
+model_peach = torch.hub.load("ultralytics/yolov5", "custom", path = 'peach.pt', force_reload=True)              #
 # model_cherry = torch.hub.load("ultralytics/yolov5", "custom", path = 'cherry.pt', force_reload=True)
 def allowed_file(filename):
     return '.' in filename and \
@@ -48,33 +48,32 @@ def allowed_file(filename):
 def get_model(step, detected_plant):
     if step == 'plant':
         return model_id
-    
-    if detected_plant == "Tomato plant":
+    if "Tomato plant" in detected_plant:
         return model_toma
-    elif detected_plant == "Grape plant":
+    elif "Grape plant" in detected_plant:
         return model_grape
-    elif detected_plant == "Apple plant":
+    elif "Apple plant" in detected_plant:
         return model_apple
-    elif detected_plant == "Blueberry plant":
+    elif "Blueberry plant" in detected_plant:
         return model_blue
-    # elif detected_plant == "Aloe Vera":
+    # elif "Aloe Vera" in detected_plant:
     #     return model_aloe
-    elif detected_plant == "Snake plant":
-        return model_snake
-    elif detected_plant == "Orange plant":
+    # elif "Snake plant" in detected_plant:
+    #     return model_snake
+    elif  "Orange plant" in detected_plant:
           return model_orange
-    # elif detected_plant == "Squash plant":
+    # elif "Squash plant" in detected_plant:
     #     return model_squash
-    elif detected_plant == "Mango plant":
+    elif "Mango plant" in detected_plant:
         return model_mango
-    elif detected_plant == "Strawberry plant" or "Raspberry plant":
+    elif "Strawberry plant" in detected_plant or "Raspberry plant" in detected_plant:
         return model_stra_rasp
-    elif detected_plant == "Pepper plant":
+    elif "Pepper plant" in detected_plant:
         return model_pepper
-    elif detected_plant == "Peach plant":
+    elif "Peach plant" in detected_plant:
         return model_peach
-    # elif detected_plant == "Cherry plant":
-    #     return model_cherry
+    elif "Cherry plant" in detected_plant:
+        return model_cherry
     else:
         raise NotImplementedError(f"Unknown plant type: {detected_plant}")
 

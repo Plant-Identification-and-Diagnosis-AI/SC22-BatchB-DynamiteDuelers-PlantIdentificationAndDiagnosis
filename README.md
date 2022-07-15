@@ -1,16 +1,40 @@
-# Computer Vision Web Scaffold
+# 🌱Plant Diagnosis Detection
 
-A scaffold for deploying dockerized flask applications.
+_Identifying plants and diagnosing various issues with them._
+[Github](https://github.com/organization-x/omni/issues).
 
-If you have any questions, feel free to open an issue on [Github](https://github.com/organization-x/omni/issues).
+### What is it and Why?🤔
 
-### Video Guide
+The main goal of this Plant Diagnosis Detection is to help general consumers understand what health issues are affecting their plant and to revive it as soon as possible! This AI product is able to identify the type of plant and then detect the particular disease it is experiencing based on the type of plant. At the moment, the AI supports a total of 14 species of plants to identify and about 35 diseases for all of the plants cumulatively. 
 
-[![Deploy a Web Project with Flask](https://img.youtube.com/vi/JUb-PpejA7w/0.jpg)](https://youtu.be/JUb-PpejA7w "Deploy a Web Project with Flask")
+### Work Process 💻
 
-This guide covers how you can quickly deploy most projects with the [Flask](https://flask.palletsprojects.com/) framework and our omni scaffold.
+This AI product runs on the YOLOv5 Algorithm Object Detection Model in which identifies the plants and individual diseases also. The steps are described below:
 
-### Quickstart Guide for Local Development
+  1. Scraping data with SerpAPI and Python's Beautiful Soup HTML parser for the plants and various diseases
+  2. Labeling and cleaning the data with RoboFlow software for getting ready to train our final models. One project for the identification and separate projects had been created, resulting in about 13,500+ images in total
+  3. Exporting and augmenting our data into the YOLOv5 model for higher accuracy and strength within the product
+  4. Model training through Google Colab that included an external GPU, RAM, and Disk Memory --> Inputting data accordingly
+  5. Using Python Flask as the backend and frontend applications such as HTML, CSS, and Bootstrap, our website was developed. The linking process included PyTorch files for each model directly from YOLOv5
+  
+
+### 👏The Team👏
+
+**Jinxuan Tang: Professor and Instructor**
+
+**Srikar Vemuri**
+
+**Ben Buzard**
+
+**Isabelle Sebastian**
+
+**Ashley Ko**
+
+**Justin Erdenebileg**
+
+**Nathan Zhou**
+
+<!-- ### Usage🚀
 
 First clone this repository through 
 
@@ -29,108 +53,25 @@ Then, clone ultralytics yolov5 in the app folder, by running
 
 Run
 
- `python3 -m main`
+ `python3 -main.py`
 
-to start the server on local, most changes while developing will be picked up in realtime by the server
+to start the server on local, most changes while developing will be picked up in realtime by the server -->
 
-### Quickstart Guide for Local Deployment
+### Statistics📈
 
-Make sure docker is installed on your system. Look that up if you don't know what that means.
+The stats include graphs and matrices of the identification and working diagnosis projects for 10 plants specifically. [Diagnosis Confusion Matrix Folder](https://drive.google.com/drive/folders/1d2rJ411F4MO6CYwUYqsSeXC-8mZteS77?usp=sharing "Diagnosis")
 
-cd into the root director of the repo then run 
+**Identification Confusion Matrix:**
+<img src="https://drive.google.com/file/d/1-ZqPY3h-8FhoPP_D7V7TZHch4y5EHOTr/view?usp=sharing"   width="484px"  height="484px"  title="Identification Confusion Matrix" style="object-fit:cover"/>
 
-`docker build -t omni .`
 
-once built, run
+**RoboFlow Stats:**
+<img src='https://drive.google.com/file/d/1-ZqPY3h-8FhoPP_D7V7TZHch4y5EHOTr/view' width=500px height=450px title='RoboFlow Identification' />
 
-`docker run -d -p 9000:80 --restart=unless-stopped --name omni omni`
 
-you should then be able to see the `omni` container running when you run 
+**Metrics:**
+<img src='https://drive.google.com/file/d/107tEWGt_OMOHuwjRw7E-zh7LgYV_NtWb/view' width=500px height=450px title='Metrics' />
 
-`docker ps -a`
 
-if it seems to be stuck (i.e. constantly listed as `Restarting`), something is wrong with the docker image or code inside causing it to repeatedly fail.
-
-you can start debugging the project by running 
-
-`docker logs -f omni` 
-
-or
-
-`docker exec -it omni /bin/bash` for an interactive bash terminal (this option only works if the container is running and not stuck in a restart loop)
-
-### Common Issues
-
-`$'\r': command not found` when attempting to start docker container
-
-this is caused by the the `entrypoint.sh` script somehow having CLRF line endings instead of LF line endings.
-
-to fix this run
-
-`sed -i 's/\r$//' entrypoint.sh`
-
-### File Structure
-
-The files/directories which you will need to edit are **bolded**
-
-**DO NOT TOUCH OTHER FILES. THIS MAY RESULT IN YOUR PROJECT BEING UNABLE TO RUN**
-
-- .gitignore
-- config.py
-- Dockerfile
-- READMD.md
-- entrypoint.sh
-- nginx_host
-- host_config
-- app/
-     - **main.py**
-     - **best.pt** <- you will need to upload this yourself after cloning the repo when developing the site
-     - **requirements.txt**
-     - **utils.py**
-     - templates/
-          - **index.html**
-
-### How to upload best.pt to your file structure?
-
-Run 
-`cp ../path/to/best.pt best.pt`
-
-### best.pt ###
-
-The weights file - must upload if you are running file on coding center or are trying to deploy.
-
-### main.py ###
-
-Contains the main flask app itself.
-
-### requirements.txt ###
-
-Contains list of packages and modules required to run the flask app. Edit only if you are using additional packages that need to be pip installed in order to run the project.
-
-To generate a requirements.txt file you can run
-
-`pip list --format=freeze > app/requirements.txt`
-
-the requirements.txt file will then be updated. Keep in mind: some packages you install on one operating system may not be available on another. You will have to debug and resolve this yourself if this is the case.
-
-### static/ ###
-
-Contains the static images, CSS, & JS files used by the flask app for the webpage. You will need to create this and put files in it. Place all your images used for your website in static/images/ so that you can then reference them in your html files.
-
-### utils.py ###
-
-Contains common functions used by the flask app. Put things here that are used more than once in the flask app.
-
-### templates/ ###
-
-Contains the HTML pages used for the webpage. Edit these to fit your project. index.html is the demo page.
-
-### Files used for deployment ###
-
-`config.py`
-`Dockerfile`
-`entrypoint.sh`
-`nginx_host`
-`host_config`
-**Only modify `host_config`. Do not touch the other files.**
-
+## 😊Thank You!😊
+Everything hosted by the [AI Camp Organization](ai-camp.org "AI Camp"). An amazing experience that every student absolutely should immerse themselves into. Thank You once again!

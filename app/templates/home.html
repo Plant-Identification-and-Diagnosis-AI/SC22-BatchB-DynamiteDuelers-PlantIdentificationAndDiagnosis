@@ -68,11 +68,6 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="#demo" class="nav-link">
-                                Try Our Model Here
-                            </a>
-                        </li>
-                        <li class="nav-item ">
                             <a href="#meet_the_team" class="nav-link">
                                 About the Team
                             </a>
@@ -80,6 +75,16 @@
                         <li class="nav-item ">
                             <a href="#our_work" class="nav-link">
                                 Work Process
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#challenges" class="nav-link">
+                                Challenges
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#improvements" class="nav-link">
+                                Improvements
                             </a>
                         </li>
                     </ul>
@@ -150,6 +155,27 @@
             </div>
         </div>
   </section>
+
+  <a id="Our Purpose"></a>
+  <section class="section">
+      <div class="container">
+          <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6 text-center">
+                      <!-- Heading -->
+                      <h2 class="section-title">
+                          Our Purpose
+                      </h2>
+                      <!-- Subheading -->
+              </div>
+          </div> <!-- / .row -->
+          <div class="row justify-content-center text-center">
+              <p class="small-text">
+                  Our main purpose and goal for this AI is to help users take the best steps possible to treat any health issues the plant may be battling. At some point, every beginner and experienced plant parent runs into an issue that they are unable to diagnose, let alone treat. Our AI will identify, diagnose, and provide solutions to various fruit plant concerns. Keeping your fruit plants alive and well has just become much easier.
+              </p>
+          </div>
+
+<hr>
+
   <a id="our_work"></a>
   <section class="section">
          <div class="container">
@@ -157,57 +183,75 @@
                  <div class="col-md-8 col-lg-6 text-center">
                          <!-- Heading -->
                          <h2 class="section-title">
-                             Our Work
+                             Work Process
                          </h2>
                          <!-- Subheading -->
                  </div>
              </div> <!-- / .row -->
              <div class="row justify-content-center text-center">
                  <p class="small-text">
-                     Learn about two students's experience at AI Camp, <br>from the beginning to the end!
+                     Our Computer Vision AI journey throughout these 3 weeks and the process!
                  </p>
              </div>
-             <div class="row justify-content-center align-items-end">
-                 <div class="col-lg-4 col-md-6">
-                     <div class="blog-box">
-                         <div class="blog-img-box">
-                             <img src="{{ url_for('static', filename='images1/brain.jpeg')}}" alt="" class="img-fluid blog-img">
-                         </div>
-                         <div class="single-blog">
-                             <div class="blog-content">
-                                 <h6>28 July 2019</h6>
-                                 <a target="_blank" href="https://medium.com/@beatrice.miha/i-learned-how-to-learn-dive-into-the-deepest-ocean-3add9449eb7e">
-                                     <h3 class="card-title">I learned how to learn: Dive into the deepest ocean</h3>
-                                 </a>
-                                 <p>Learn about Beatrice's experience at AI Camp, from the beginning to the end!</p>
-                                 <a target="_blank" href="https://medium.com/@beatrice.miha/i-learned-how-to-learn-dive-into-the-deepest-ocean-3add9449eb7e" class="read-more">Read More</a>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
- 
-                 <div class="col-lg-4 col-md-6">
-                     <div class="blog-box">
-                         <div class="blog-img-box">
-                             <img src="{{ url_for('static', filename='images1/happy.png')}}" alt="" class="img-fluid blog-img">
-                         </div>
-                         <div class="single-blog">
-                             <div class="blog-content">
-                                 <h6> 5 August 2019</h6>
-                                 <a target="_blank" href="https://medium.com/@thomaschen395/how-ai-camp-prepared-me-for-the-real-world-7f2a8c28cde5">
-                                     <h3 class="card-title">How AI Camp Prepared Me for the Real World</h3>
-                                 </a>
- 
-                                 <p> Thomas' experience at AI Camp, from the beginning to the end!</p>
-                                  <a target="_blank" href="https://medium.com/@thomaschen395/how-ai-camp-prepared-me-for-the-real-world-7f2a8c28cde5" class="read-more">Read More</a>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
+             <div class="constrain steps">
+                <div class="text">
+                    <h3>Step 1: Scraping Data</h3>
+                    <p>
+                        The first step in the process of data accumulation was using SerpAPI and the 
+                        Beautiful Soup HTML parser. These services were used to scrape data from the 
+                        Google Search Engine and specific websites. Additionally, we used a dataset available 
+                        on Kaggle, resulting in a total of about 7,500+ in entirety.
+
+                    </p>
+                </div>
+                <div class="image right">
+                    <img src="{{ url_for('static', filename='images/Screenshot (15).png') }}" alt="Cleaned dataset with pandas">
+                </div>
+                <div class="text right">
+                    <h3>Step 2: Cleaning and Labeling the Data</h3>
+                    <p>
+                        It was then necessary to label the data through the RoboFlow application
+                        and clean accordingly. Since we had a two-step procedure of our product,
+                        we ended up at a total of 13 projects/models. This included the main identification 
+                        model as well as the various species of fruits. Altogether,
+                        there are a total of about 13,000+ images cumulatively including the augmentation steps.
+                    </p>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/Screenshot (17).png') }}"
+                        alt="Code used to train the model">
+                </div>
+                <div class="text">
+                    <h3>Step 3: Training the Models</h3>
+                    <p>
+                        Using the YOLOv5 algorithm and Google Colab, our models were trained. Throughout the training
+                        process, input parameters such as batch size or the number of epochs altered. Eventually, we implemented
+                        the identification model and all diagnosis models where we then received metric data and respective 
+                        PyTorch files.
+                    </p>
+                </div>
+                <div class="image right">
+                    <img src="{{ url_for('static', filename='images/Screenshot (21).png') }}"
+                        alt="Frontend code for the try-it page">
+                </div>
+                <div class="text right">
+                    <h3>Step 4: Interface and Website Integration</h3>
+                    <p>
+                        We then developed a website through Cocalc consisting of the necessary HTML, CSS(Some Bootstrap),
+                        and Javascript code for the frontend. As the backend, we integrated the Python Flask framework and
+                        included our PyTorch model files. Unfortunately, only 10 out of the 14 diagnosis models were finally used
+                        due to differences in accuracy. Overall, our model takes an image of a plant, provides an output, takes an
+                        image of a diseased leaf of the plant, and provides a diagnosis and solution.
+
+                    </p>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/Screenshot (25).png') }}"
+                        alt="Code used to train the model">
+                </div>
+            </div>              
      </section>
-     <section id="projects" class="section-bottom">
+     <!-- <section id="projects" class="section-bottom">
          <div class="container">
              <div class="row py-4">
                  <div class="col-lg-7 col-md-12 col-sm-12 ">
@@ -215,22 +259,71 @@
                          <img src="{{ url_for('static', filename='images1/bg/banner_bg.jpg')}}" alt="" class="img-fluid">
                      </div>
                  </div>
-                 <div class="col-lg-4 col-md-12 col-sm-12 ">
-                     <div class="project-content-block">
-                         <h4>Github</h4>
-                         <h2>Want to see the building process of our project?</h2>
-                         <p>Explore the inner workings of our project, from capturing data scripts to YOLO training!</p>
-                         <p class="mb-0">
-                             <a href="https://github.com/zikegcwk/aicamp_emotion" target="_blank" class="btn btn-white-black btn-circled">
-                                 AI Camp Repository
-                             </a>
-                         </p>
-                     </div>
-                 </div>
              </div>
          </div>
-     </section>
- 
+     </section> -->
+
+<a id="challenges"></a>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 text-center">
+                    <!-- Heading -->
+                    <h3 class="section-title">
+                        Challenges
+                    </h3>
+                    <!-- Subheading -->
+            </div>
+        </div> <!-- / .row -->
+        <div class="row justify-content-left text-left">
+            <p class="small-text">
+                <ul type="square" class="small-text">
+                    <h4>
+                        As expected, we ran into a few challenges:
+                    </h4>
+                    <li>The large amount of data (13,000+ images) that our two models require took a lot of time to label. </li>
+                    <li>We had around 14 Roboflow Projects that all needed to be trained.</li>
+                    <li>Lack of quality data for diagnosis.</li>
+                    <li>Diagnosis accuracy is much lower than Identification accuracy.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+<a id="improvements"></a>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 text-center">
+                    <!-- Heading -->
+                    <h3 class="section-title">
+                        Improvements
+                    </h3>
+                    <!-- Subheading -->
+            </div>
+        </div> <!-- / .row -->
+        <div class="row justify-content-left text-left">
+            <p class="small-text">
+                <ul type="square" class="small-text">
+                    <p>
+                        Some improvements we could've made are...
+                    </p>
+                    <li>Including sufficient amounts of high-quality data for each fruit's disease.</li>
+                    <li>Focusing more time on the diagnosis as much as we did for the Idenfication accuracy.</li>
+                    <li>Optimizing more time by searching for quality pre-labeled datasets.</li>
+                    <p>
+                        Additions we could add to our project:
+                    </p>
+                    <li>Increasing the amount of plant species that we can identify.</li>
+                    <li>Adding the majority of the diseases for each plant to diagnose.</li>
+                    <li>Adding more unique datasets to increase accuracy.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+        
+
 <a id="meet_the_team"></a>
 <section class="section section-padding" id="services-2">
         <div class="container">
@@ -238,7 +331,7 @@
                 <div class="col-md-8 col-lg-6 text-center">
                     <div class="section-heading">
                         <!-- Heading -->
-                        <h2 class="section-title section-title-padding mb-2 text-white">
+                        <h2 class="section-title section-title-padding mb-2 text-black">
                             Meet the Team
                         </h2>
                     </div>
@@ -248,8 +341,8 @@
             <div class="row justify-content-center text-center">
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
-                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/srikar_photo.jpg') }}" alt="Card image cap" width="300" height="450">
+                        <div class="card  card-corners h-50px" style="width: 20rem">
+                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/srikar_photo3.jpg') }}" alt="Card image cap" width="300" height="700">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
                                     <h1 class="display-11">Jinxuan Tang</h1>
@@ -260,7 +353,7 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-50px" style="width: 20rem;">
                             <div class="image__title">Srikar Vemuri</div>
                             <p class="image__description">
                                 A WebDev and Backend enthusiast who absolutely loves AI Computer Vision!
@@ -270,8 +363,8 @@
                 </div>
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
-                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/JinxuanTang3.jpg') }}" alt="Card image cap" width="300" height="450">
+                        <div class="card  card-corners h-50px" style="width: 20rem;">
+                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/ben_buzard.jpg') }}" alt="Card image cap" width="300" height="450">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
                                     <h1 class="display-11">Jinxuan Tang</h1>
@@ -282,18 +375,18 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-50px" style="width: 20rem">
                             <div class="image__title">Ben Buzard</div>
                             <p class="image__description">
-                                something something something something something
+                                I like playing the Clarinet and have been programming in various CS fields for years.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
-                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/JinxuanTang3.jpg') }}" alt="Card image cap" width="300" height="450">
+                        <div class="card  card-corners h-60px" style="width: 20rem;">
+                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/isabelle.jpg') }}" alt="Card image cap" width="250" height="450">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
                                     <h1 class="display-11">Jinxuan Tang</h1>
@@ -304,18 +397,18 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-50px" style="width: 20rem">
                             <div class="image__title">Isabelle Sebastian</div>
                             <p class="image__description">
-                                something something something something something
+                                Hello! I started coding with Javascript almost two years ago, later learned some Python, and have been interested in ML & programming ever since  :)
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
-                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/JinxuanTang3.jpg') }}" alt="Card image cap" width="300" height="450">
+                        <div class="card  card-corners h-50px" style="width: 20rem;">
+                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/ashley_ko.jpg') }}" alt="Card image cap" width="300" height="450">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
                                     <h1 class="display-11">Jinxuan Tang</h1>
@@ -326,10 +419,10 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-50px" style="width: 20rem">
                             <div class="image__title">Ashley Ko</div>
                             <p class="image__description">
-                                something something something something something
+                                I enjoy painting during my freetime. I have had an extreme passion for coding & programming ever since I was in seventh grade.
                             </p>
                         </div>
                     </div>
@@ -337,8 +430,8 @@
 
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
-                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/JinxuanTang3.jpg') }}" alt="Card image cap" width="300" height="450">
+                        <div class="card  card-corners h-50px" style="width: 20rem;">
+                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/justin_erdenebileg.jpg') }}" alt="Card image cap" width="300" height="450">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
                                     <h1 class="display-11">Jinxuan Tang</h1>
@@ -349,18 +442,18 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-20px" style="width: 20rem">
                             <div class="image__title">Justin Erdenebileg</div>
                             <p class="image__description">
-                                something something something something something
+                                I like coding in c++ and java 
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
-                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/JinxuanTang3.jpg') }}" alt="Card image cap" width="300" height="450">
+                        <div class="card  card-corners h-50px" style="width: 20rem;">
+                            <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/nathan_zhou.jpg') }}" alt="Card image cap" width="300" height="450">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
                                     <h1 class="display-11">Jinxuan Tang</h1>
@@ -371,7 +464,7 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-50px" style="width: 20rem">
                             <div class="image__title">Nathan Zhou</div>
                             <p class="image__description">
                                 something something something something something
@@ -381,7 +474,7 @@
                 </div>
                 <div class="image-container">
                     <div class="image">
-                        <div class="card  card-corners" style="width: 20rem h-50px;">
+                        <div class="card  card-corners h-50px" style="width: 20rem;">
                             <img class="card-img-top img-responsive card-corners" src="{{ url_for('static', filename='images/JinxuanTang3.jpg') }}" alt="Card image cap" width="300" height="450">
                             <div class="card-body card-corners">
                                 <!-- <div class="jumbotron">
@@ -393,7 +486,7 @@
                             </div>
                           </div>
                         <!-- <img class="image__img" src="{{ url_for('static', filename='images/tomato_plant (1).jpg') }}" alt="Bricks"> -->
-                        <div class="image__overlay image__overlay--blur card-corners">
+                        <div class="image__overlay image__overlay--blur card-corners h-50px" style="width: 20rem">
                             <div class="image__title">Jinxuan Tang</div>
                             <p class="image__description">
                                 Our Amazing Instructor!
@@ -404,82 +497,12 @@
           
     </section>
 
- <footer class="section " id="footer">
-        <div class="overlay footer-overlay"></div>
-        <!--Content -->
-        <div class="container">
-            <div width="100%" class="row">
-                <div class="col justify-content-center align-items-center text-center">  
-                <div class="footer-widget">
-                        <!-- Brand -->
-                        <a href="#" class="footer-brand text-white">
-                            <h2 class="section-title section-text">AI Camp</h2>
-                        </a>
-                        <h1>Learn AI in three weeks with zero coding experience.</h1>
-                        <p>AI Camp teaches middle and high school students machine learning and career frameworks through real life experience. <br>Prepare for your major and career by joining us!</p>
-                        <p class="mb-0">
-                            <a href="https://michaelzhang1.typeform.com/to/LWIfVW1H?typeform-source=www.ai-camp.org" target="_blank" margin-bottom="20px" class="btn btn-text btn-results btn-white btn-circled">
-                                Register for AI Camp
-                            </a>
-                        </p>
-                </div>
-                <div class="footer-widget footer-about">
-                    <h3>About</h3>
-                    <!-- Links -->
-                    <ul class="footer-links ">
-                        <li>
-                            <u>
-                            <a href="https://www.ai-camp.org/" target="_blank">
-                                AI Camp Website
-                            </a>
-                            </u>
-                        </li>
-                        <li>
-                            <u>
-                            <a href="https://www.ai-camp.org/terms-of-service" target="_blank">
-                                Terms of Services
-                            </a>
-                            </u>
-                        </li>
-                        <li>
-                            <u>
-                            <a href="https://www.ai-camp.org/privacy-notice" target="_blank">
-                                Privacy Policy
-                            </a>
-                        </u>
-                        </li>
-                        <li>
-                            <u>
-                            <a href="https://www.ai-camp.org/faq" target="_blank">
-                                Frequently Asked Questions
-                            </a>
-                        </u>
-                        </li>
-                        <li>
-                            <u>
-                            <a href="mailto: hello@ai-camp.org" target="_blank">
-                                Contact
-                            </a>
-                        </u>
-                        </li>
-                        <li>
-                        <u>
-                            <a href="https://www.youtube.com/channel/UCUGJzo5EwViLGpAgYphNyzg/featured" target="_blank">
-                                YouTube
-                            </a>
-                        </u>
-                        </li>
-                    </ul>
-            </div>  
-                </div>
-            </div> <!-- / .row -->
-
-
+    <footer class="section " id="footer">
             <div class="row text-right pt-5">
                 <div class="col-lg-12">
                     <!-- Copyright -->
                     <p class="footer-copy ">
-                        &copy; Copyright <span class="current-year">AI Camp</span> All rights reserved.
+                        &copy; Copyright 2022 All rights reserved.
                     </p>
                 </div>
             </div> <!-- / .row -->

@@ -47,22 +47,17 @@
                                                 </a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a href="/#home" class="nav-link">
+                                            <a id="home-nav-button" href="/#home" class="nav-link">
                                                 Home
                                             </a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a href="/#demo" class="nav-link">
-                                                Try Our Model Here
-                                            </a>
-                                        </li>
-                                        <li class="nav-item ">
-                                            <a href="/#meet_the_team" class="nav-link">
+                                            <a id="meet-nav-button" href="/#meet_the_team" class="nav-link">
                                                 About the Team
                                             </a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a href="/#our_work" class="nav-link">
+                                            <a id="work-nav-button" href="/#our_work" class="nav-link">
                                                 Work Process
                                             </a>
                                         </li>
@@ -85,11 +80,23 @@
                                 <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
                             </form>
                             <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
-                                {% if step == "finish" %}
-                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Reset
-                                {% else %}
                                 <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Upload Picture of {{ "Plant" if step == "plant" else "Disease" }}
-                                {% endif %}
+                            </button>
+                        </a>
+
+                        <a class="w-100" id='seefood_reset'>
+                            <form id='seefood_form' method=post enctype=multipart/form-data>
+                                <input id="seefood_input_step" name="step" type="text" value="{{ step }}" hidden/>
+                                <input id="seefood_input_step" name="detected_plant" type="text" value="{{ detected_plant }}" hidden/>
+                                <input id="seefood_input_step" name="plant_confidence" type="text" value="{{ plant_confidence}}" hidden/>
+                                <input id="seefood_input_step" name="detected_disease" type="text" value="{{ detected_disease }}" hidden/>
+                                <input id="seefood_input_step" name="disease_confidence" type="text" value="{{ disease_confidence}}" hidden/>
+                                <input id="seefood_input_step" name="plant_filename" type="text" value="{{ plant_filename }}" hidden/>
+                                <input id="seefood_input_step" name="disease_filename" type="text" value="{{ disease_filename }}" hidden/>
+                                <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
+                            </form>
+                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
+                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Reset
                             </button>
                         </a>
                     </div>
@@ -99,6 +106,26 @@
                             <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ plant_confidence }}</p>
                             <p class="" style="font-size: 1.8em;">Detected Disease: {{ detected_disease }}</p>
                             <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ disease_confidence }}</p>
+                            <style>
+                            .glow {
+                                font-size: 30px;
+                                font-family: fantasy;
+                                color: #fff;
+                                text-align: center;
+                                animation: glow 1s ease-in-out infinite alternate;
+                              }
+                              
+                              @-webkit-keyframes glow {
+                                from {
+                                  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e6000c, 0 0 40px #e6000c, 0 0 50px #e6000c, 0 0 60px #e6000c, 0 0 70px #e6000c;
+                                }
+                                
+                                to {
+                                  text-shadow: 0 0 20px #fff, 0 0 30px #ff4d4d, 0 0 40px #ff4d4d, 0 0 50px #ff4d4d, 0 0 60px #ff4d4d, 0 0 70px #ff4d4d, 0 0 80px #ff4d4d;
+                                }
+                              }
+                            </style>
+                            <p class="glow">PLEASE ONLY INCLUDE LEAVES AFFECTED FOR DIAGNOSIS</p>
                         </div>
                     </div>
                 </div>
@@ -120,60 +147,142 @@
                 <div style='grid-area: info'>
                     <div class='bg-secondary rounded-lg w-100 h-100 p-4'>
                         <h3>Diagnosis Solution!</h3>
+
                         {% if detected_disease == 'Early blight' %}
-                        <p>you got early blight!</p>
-                        <p>good job</p>
-                        <p>you win: </p>
-                        <p>a dead plant!</p>
+                        <p>We've diagnosed this plant with Early Blight!</p>
+                        <p>Here is some additional info to take care of this disease: </p>
+                        <a href='https://growers-planet.com/how-to-get-rid-of-early-blight/'>How To Get Rid Of Early Blight</a>
+                        <a href='https://thehomesteadinghippy.com/getting-rid-of-early-blight/'>How to Prevent and Get Rid of Early Blight</a>
+
                         {% elif detected_disease == 'Late blight' %}
-                        <p>you got late blight!</p>
-                        <p>here is some additional info to take care of this disease!</p>
-                        {% elif detected_disease == 'Powdery mildew' %}
-                        <p>you got powdery mildew!</p>
-                        <p>here is some additional info to take care of this disease: </p>
-                        <a>https://www.almanac.com/pest/powdery-mildew#:~:text=Baking%20soda%20has%20been%20proved,is%20another%20effective%20home%20remedy.</a>
-                        <a>https://www.youtube.com/watch?v=yHBvz1vBd7A</a>
-                        <a>https://www.growingagreenerworld.com/controlling-or-eliminating-powdery-mildew/</a>
-                        {% elif detected_disease == 'Leaf curling' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Citrus greening' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Downy mildew' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Bacterial wilt' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Browning' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Exobasidium leaf spot' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Anthracnose' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Septoria leaf spot' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Leaf spot' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Leaf scorch' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Yellow rust' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Bacterial spot' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Wilting' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Tipburn' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Black rot' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Cedar rust' %}
-                        <p>hello you got late blight</p>
-                        {% elif detected_disease == 'Apple scab' %}
-                        <p>hello you got late blight</p>
+                        <p>We've diagnosed this plant with Late Blight!</p>
+                        <p>Here is some additional info to take care of this disease: </p>
+                        <a href= 'https://extension.umn.edu/disease-management/late-blight#:~:text=Managing%20Late%20Blight%20in%20the%20Home%20Garden&text=Plant%20tomatoes%20where%20no%20tomatoes,dry%20quickly%20in%20the%20sun.'>Managing Late Blight in the Home Garden</a>
+                        <a href='https://growagoodlife.com/late-blight/'>What to Do When Late Blight Strikes Your Tomatoes</a>
+                        <a href='https://www.gardeningchannel.com/tomato-diseases-how-to-fight-late-blight/'>How to Fight Late Blight</a>
+
                         {% elif detected_disease == 'Tomato bacterial spot' %}
-                        <p>hello you got late blight</p>
+                        <p>We've diagnosed this plant with Tomato Bacterial Spot!</p>
+                        <p>Here is some additonal information to take care of this disease: </p>
+                        <a href='https://www.growingproduce.com/vegetables/tactics-to-tackle-bacterial-spot-of-tomato/'>Tactics to Tackle Bacterial Spot of Tomato</a>
+                        <a href='https://www.gardeningchannel.com/tomato-diseases-how-to-fight-bacterial-spot/'>How to Fight Bacterial Spot</a>
+
+                        {% elif detected_disease == 'Leaf curling' %}
+                        <p>We've diagnosed this plant with Leaf Curling!</p>
+                        <p>Here is some additonal information to take care of this disease: </p>
+                        <a href='https://homeguides.sfgate.com/treat-leaf-curl-72988.html'>How to Treat Leaf Curl</a>
+                        <a href='https://www.abc.net.au/gardening/factsheets/preventing-leaf-curl/9436858'>Preventing Leaf Curl</a>
+
+                        {% elif detected_disease == 'Citrus greening' %}
+                        <p>We've diagnosed this plant with Citrus Greening!</p>
+                        <p>Here is some additonal information to take care of this disease:  </p>
+                        <a href='https://www.floridacitrus.org/newsroom/citrus-411/citrus-greening/potential-citrus-greening-solutions/'>Potential Citrus Greening Solutions</a>
+                        <a href='https://www.syngenta-us.com/thrive/production/citrus-siege.html'>Fighting Citrus Greening</a>
+
+                        {% elif detected_disease == 'Downy mildew' %}
+                        <p>We've diagnosed this plant with Downy Mildew</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://www.epicgardening.com/downy-mildew/'>Treatment for Downy Mildew Disease</a>
+                        <a href='https://growfully.com/downy-mildew/'>How to Stop Downy Mildew From Ruining Your Garden</a>
+
+                        {% elif detected_disease == 'Bacterial wilt' %}
+                        <p>We've diagnosed this plant with Bacterial Wilt</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href= 'https://www.gardeningchannel.com/tomato-diseases-how-to-fight-bacterial-wilt/'>How to Fight Bacterial Wilt</a>
+                        <a href= 'https://www.daf.qld.gov.au/business-priorities/agriculture/plants/fruit-vegetable/diseases-disorders/bacterial-wilt'>Bacterial Wilt</a>
+
+                        {% elif detected_disease == 'Exobasidium Leaf Spot' %}
+                        <p>We've diagnosed this plant with Exobasidium Leaf Spot</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://blueberries.ces.ncsu.edu/2019/05/exobasidium-leaf-and-fruit-spot/#:~:text=Treatment%20consists%20of%20spraying%20the,the%20surface%20of%20the%20stems.'>Exobasidium Leaf and Fruit Spot</a>
+                        <a href='https://nwdistrict.ifas.ufl.edu/phag/2021/06/18/what-are-the-white-spots-on-my-blueberries-exobasidium-fruit-spot/'>What are the White Spots onmy Blueberries?</a>
+
+                        {% elif detected_disease == 'Anthracnose' %}
+                        <p>We've diagnosed this plant with Anthracnose!</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://www.almanac.com/pest/anthracnose'>How to Identify and Control Anthracnose</a>
+                        <a href='https://www.gardeningknowhow.com/plant-problems/disease/anthracnose-disease.htm'>Anthracnose Disease Info and Control</a>
+                        <a href='https://www.planetnatural.com/pest-problem-solver/plant-disease/anthracnose/'>Anthracnose Disease: Symptoms, Treatmen and Control</a>
+
+                        {% elif detected_disease == 'Septoria leaf spot' %}
+                        <p>We've diagnosed this plant with Septoria Leaf Spot!</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://www.thespruce.com/identifying-and-controlling-septoria-leaf-spot-of-tomato-1402974'>Identifying and Controlling Septoria Leaf Spot</a>
+                        <a href='https://www.trifectanatural.com/problem-identifier/get-rid-of-septoria-leaf-spot/'>How to Get Rid of Septoria Leaf Spot</a>
+
+                        {% elif detected_disease == 'Leaf spot' %}
+                        <p>We've diagnosed this plant with Leaf Spot!</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://heyrooted.com/blogs/common-issues/how-to-treat-leaf-spot'>How to Treat Leaf Spot</a>
+                        <a href='https://www.youtube.com/watch?v=IOJvgXzxXUQ'>Causes, treatment, & prevention of leaf spots</a>
+
+                        {% elif detected_disease == 'Leaf scorch' %}
+                        <p>We've diagnosed this plant with Leaf Scorch!</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href= 'https://treesunlimitednj.com/cure-leaf-scorch/'>How to Cure Leaf Scorch</a>
+                        <a href='https://www.thompson-morgan.com/diseases/leaf-scorch'>Garden Diseases - Leaf Scorch</a>
+
+                        {% elif detected_disease == 'Yellow rust' %}
+                        <p>We've diagnosed this plant with Yellow Rust!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://www.almanac.com/pest/rust-plant-disease'>How to Identify and Control Rust Plant Disease</a>
+                        <a href='https://drecampbell.com/natural-ways-treat-rust-on-plants/'>10 Natural Ways to Treat Rust on Plants</a>
+
+                        {% elif detected_disease == 'Bacterial spot' %}
+                        <p>We've diagnosed this plant with Bacterial Spot!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://homyden.com/bacterial-spot-control-identify-get-rid-bacterial-spots/'>How to Identify and Get Rid of Bacterial Spots</a>
+                        <a href='https://morningchores.com/bacterial-leaf-spot/'>Bacterial Leaf Spot: How to Identify and Control This Deadly Plant Disease</a>
+
+                        {% elif detected_disease == 'Wilting' %}
+                        <p>We've diagnosed this plant with Wilting!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://www.gardeningknowhow.com/edible/vegetables/pepper/pepper-wilt-on-plants.htm'>Pepper Wilt On Plants – What Causes Wilting Peppers</a>
+                        <a href='https://greenupside.com/do-your-pepper-plants-keep-dying-heres-how-to-save-them/'>Pepper Plants Wilting and Dying? Just Do This To Save Them</a>
+
+                        {% elif detected_disease == 'Tipburn' %}
+                        <p>We've diagnosed this plant with Tipburn!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://www.gardeningknowhow.com/edible/fruits/mango/what-causes-mango-tipburn.htm'>Mango Leaf Tips Are Burnt – What Causes Mango Tipburn</a>
+                        <a href='https://pestoscope.com/tip-burn-salt-injury-in-mango/'>Tip Burn: Salt injury in Mango</a>
+                
+                        {% elif detected_disease == 'Black rot' %}
+                        <p>We've diagnosed this plant with Black Rot!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://homeguides.sfgate.com/treat-black-rot-80130.html'>How to Treat Black Rot</a>
+                        <a href='https://extension.psu.edu/black-rot-of-apple-in-home-fruit-plantings'>Black Rot of Apple in Home Fruit Plantings</a>
+
+                        {% elif detected_disease == 'Cedar rust' %}
+                        <p>We've diagnosed this plant with Cedar Rust!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://www.planetnatural.com/pest-problem-solver/plant-disease/cedar-apple-rust/'>Cedar Apple Rust Identification and Control</a>
+                        <a href='https://extension.umn.edu/plant-diseases/cedar-apple-rust#managing-rust-on-apples%2C-hawthorns%2C-and-other-plants-in-the-rosaceae-family-1172760'>How to manage cedar apple rust and related rust diseases</a>
+
+                        {% elif detected_disease == 'Apple scab' %}
+                        <p>We've diagnosed this plant with Apple Scab!</p>
+                        <p>Here is some additional information to treat this disease: </p>
+                        <a href='https://www.thespruce.com/apple-scab-disease-4845572'>How to Identify, Treat, and Prevent Apple Scab</a>
+                        <a href='https://www.planetnatural.com/pest-problem-solver/plant-disease/apple-scab/'>Apple Scab Identification and Control</a>
+
+                        {% elif detected_disease == 'Powdery mildew' %}
+                        <p>We've diagnosed this plant with Powdery Mildew!</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://www.almanac.com/pest/powdery-mildew#:~:text=Baking%20soda%20has%20been%20proved,is%20another%20effective%20home%20remedy.'>How to Prevent Powdery Mildew</a>
+                        <a href='https://www.youtube.com/watch?v=yHBvz1vBd7A'>How to Get Rid of Powdery Mildew (4 Easy Steps)</a>
+                        <a href='https://www.growingagreenerworld.com/controlling-or-eliminating-powdery-mildew/'>Controlling or Eliminating Powdery Mildew</a>
+                        
                         {% elif detected_disease == 'Shothole' %}
-                        <p>hello you got late blight</p>
+                        <p>We've diagnosed this plant with Shothole</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://www.gardeningknowhow.com/plant-problems/disease/shot-hole-disease-fungus.htm'>Information On Shot Hole Disease Treatment</a>
+                        <a href='https://thefarmatgreenvillage.com/shot-hole-disease-treatment-and-prevention/'>Shot Hole Disease: Treatment and Prevention</a>
+
                         {% elif detected_disease == 'Isariopsis leaf spot' %}
-                        <p>hello you got late blight</p>
+                        <p>We've diagnosed this plant with Isariopsis Leaf Spot</p>
+                        <p>Here is some additional information to take care of this disease: </p>
+                        <a href='https://www.gardeningknowhow.com/plant-problems/disease/plant-leaf-spots,htm'>Plants With Spotted Leaves: Fungal Leaf Spot Treatments</a>
+                        <a href='https://www.goodfruit.com/11-tips-to-beat-grape-fungal-diseases/'>11 tips to beat grape fungal diseases</a>
+
                         {% else %}
                         <p>We don't currently have a diagnosis for this disease!</p>
                         {% endif %}
@@ -182,133 +291,71 @@
                 {% endif %}
             </div>
         </div>
-
-
-        <!-- <div class='container-fluid'>
-            <div class='row'>
-                <div class='col vh-100 m-4' style="display: grid; grid-template-rows: minmax(128px, 1fr)repeat(auto-fit, minmax(240));">
-                    <div style="grid-row: 1/1;">
-                        <nav class="navbar navbar-expand-lg navbar-dark fixed-top site-navigation main-nav navbar-togglable">
-                            <div class="container">
-                                <a class="navbar-brand" href="#">
-                                    <img src="{{ url_for('static', filename='images/ai-camp-logo-128x128.png')}}" width="55" height="55" alt="">
-                                  </a>
-                                <a class="navbar-brand pr-2" href="#">
-                                    <div>
-                                        <h3 class="text-center">Plant Diagnosis</h3>
-                                        <h3 class="text-center">Detection</h3>
-                                    </div>
-                                </a>
-                                <!-- Toggler --
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
-                                    <span class="fa fa-bars"></span>
-                                </button>
-                                <!-- Collapse --
-                                <div class="collapse navbar-collapse" id="navbarCollapse">
-                                    <!-- Links --
-                                    <ul class="navbar-nav row">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#home" id="navbarWelcome" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Links
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="navbarWelcome">
-                                                     <a class="dropdown-item " target="_blank" href="https://github.com/zikegcwk/aicamp_emotion">
-                                                        Github Repo
-                                                  </a>
-                                                    <a class="dropdown-item " target="_blank" href="">
-                                                        Model Slideshow
-                                                    </a>
-                                            </li>
-                                            <li class="nav-item ">
-                                                <a href="/#home" class="nav-link">
-                                                    Home
-                                                </a>
-                                            </li>
-                                            <li class="nav-item ">
-                                                <a href="/#demo" class="nav-link">
-                                                    Try Our Model Here
-                                                </a>
-                                            </li>
-                                            <li class="nav-item ">
-                                                <a href="/#meet_the_team" class="nav-link">
-                                                    About the Team
-                                                </a>
-                                            </li>
-                                            <li class="nav-item ">
-                                                <a href="/#our_work" class="nav-link">
-                                                    Work Process
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    <!-- <ul class="ml-lg-auto list-unstyled m-0 nav-btn">
-                                        <li><a href="https://michaelzhang1.typeform.com/to/LWIfVW1H?typeform-source=www.ai-camp.org" target="_blank" class="btn btn-green btn-circled btn-two">Register for AI Camp</a></li>
-                                    </ul> --
-                                </div> <!-- / .navbar-collapse --
-                            </div> <!-- / .Container --
-                        </nav>
-                    </div>
-                    <div class="d-flex justify-content-center" style="grid-row: 2/2;">
-                        <a class="w-100" id='seefood_button'>
-                            <form id='seefood_form' method=post enctype=multipart/form-data>
-                                <input id="seefood_input_step" name="step" type="text" value="{{ step }}" hidden/>
-                                <input id="seefood_input_step" name="detected_plant" type="text" value="{{ detected_plant }}" hidden/>
-                                <input id="seefood_input_step" name="plant_confidence" type="text" value="{{ plant_confidence}}" hidden/>
-                                <input id="seefood_input_step" name="detected_disease" type="text" value="{{ detected_disease }}" hidden/>
-                                <input id="seefood_input_step" name="disease_confidence" type="text" value="{{ disease_confidence}}" hidden/>
-                                <input id="seefood_input_step" name="plant_filename" type="text" value="{{ plant_filename }}" hidden/>
-                                <input id="seefood_input_step" name="disease_filename" type="text" value="{{ disease_filename }}" hidden/>
-                                <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
-                            </form>
-                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
-                                {% if step == "finish" %}
-                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Reset
-                                {% else %}
-                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Upload Picture of {{ "Plant" if step == "plant" else "Disease" }}
-                                {% endif %}
-                            </button>
-                        </a>
-                    </div>
-
-                    <div class='bg-secondary rounded-lg w-100 h-100 p-4' style="grid-row: 3/3;">
-                        <p class="" style="font-size: 1.8em;">Detected Plant: {{ detected_plant }}</p>
-                        <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ plant_confidence }}</p>
-                        <p class="" style="font-size: 1.8em;">Detected Disease: {{ detected_disease }}</p>
-                        <p class="mb-2" style="font-size: 1.2em;">Confidence: {{ disease_confidence }}</p>
-                    </div>
-                </div>
-                <div class='col mx-4'>
-                    {% if not plant_filename == '' %}
-                    <img src="{{ url_for('static', filename='uploads/' + plant_filename) }}" />
-                    {% endif %}
-                    <div class="my-4"></div>
-                    {% if not disease_filename == '' %}
-                    <img src="{{ url_for('static', filename='uploads/' + disease_filename) }}" />
-                    {% endif %}
-                </div>
-            </div>
-        </div> -->
     </section>
-    {% if step == "finish" %}
+
+    <section class="mbr-section mbr-section-nopadding" id="services-2" data-rv-view="5" style="padding-top: 60px; margin-top: 60px; padding-bottom: 60px">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6 text-center">
+                <h3 class="section-title display-4 results-title text-white">Why do we miss sometimes?</h3>
+
+                <div class="lead text-white">
+                    <p class="text-white section-text">Unfortunately, our model may incorrectly diagnose or identify your plant; this is primarily due to limited data our model is trained on or a variety of other reasons such as low-quality images, unique species, etc.&nbsp;</p>
+                </div>
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/confusion_matrix.png')}}">
+
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                {% if "Tomato plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/tomato_confusion.png')}}">
+                {% elif "Grape plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/grape_confusion.png')}}">
+                {% elif "Apple plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/apple_confusion.png')}}">
+                {% elif "Blueberry plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/blueberry_confusion.png')}}">
+                {% elif  "Orange plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/orange_confusion.png')}}">
+                {%  elif "Mango plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/mango_confusion.png')}}">
+                {% elif "Strawberry plant" in detected_plant or "Raspberry plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/strawberry_confusion.png')}}">
+                {% elif "Pepper plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/tomato_confusion.png')}}">
+                {% elif "Peach plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/tomato_confusion.png')}}">
+                {% elif "Cherry plant" in detected_plant: %}
+                <img class="mbr-figure-graph" src="{{ url_for('static', filename='images/confusion_matrixes/tomato_confusion.png')}}">
+                {% endif %}
+            </div>
+        </div>
+</section>
+
     <script>
-        function openDialog() {
+        function reset() {
             var notDetectedYet = 'Not%20Detected%20Yet'
             window.location = window.location.href.split("?")[0] + "?step=plant&detected_plant={notDetectedYet}&plant_confidence={notDetectedYet}&detected_disease={notDetectedYet}&disease_confidence={notDetectedYet}".replaceAll("{notDetectedYet}", notDetectedYet) + "&plant_filename=&disease_filename="
             // document.getElementById('seefood_input_field').click();
         }
     </script>
-    {% else %}
     <script>
         function openDialog() {
             // window.location = window.location + "use-model"
             document.getElementById('seefood_input_field').click();
         }
     </script>
-    {% endif %}
     <script>
         // document.onload = function(ev) {
         // added to get upload with a button working
         // document.documentElement.style.overflow = 'hidden';
+        var rootPath = window.location.href.split("/")
+        rootPath.pop()
+        rootPath = rootPath.join("/")
+        document.getElementById("home-nav-button").href = rootPath
+        document.getElementById("meet-nav-button").href = rootPath + "#meet_the_team"
+        document.getElementById("work-nav-button").href = rootPath + "#our_work"
+
         document.getElementById('seefood_button').addEventListener('click', openDialog);
+        document.getElementById('seefood_reset').addEventListener('click', reset);
 
         var error = "{{ error }}"
         switch(error) {
