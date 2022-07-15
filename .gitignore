@@ -124,3 +124,7 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# User uploaded images
+app/static/uploads
+*.term
