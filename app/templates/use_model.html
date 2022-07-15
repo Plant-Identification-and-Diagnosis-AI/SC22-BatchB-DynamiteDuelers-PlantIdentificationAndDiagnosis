@@ -79,8 +79,8 @@
                                 <input id="seefood_input_step" name="disease_filename" type="text" value="{{ disease_filename }}" hidden/>
                                 <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
                             </form>
-                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
-                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Upload Picture of {{ "Plant" if step == "plant" else "Disease" }}
+                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg btn-size">
+                                <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Upload {{ "Plant" if step == "plant" else "Disease" }}
                             </button>
                         </a>
 
@@ -95,7 +95,7 @@
                                 <input id="seefood_input_step" name="disease_filename" type="text" value="{{ disease_filename }}" hidden/>
                                 <input id="seefood_input_field" name="file" type="file" onchange="this.form.submit();" hidden/>
                             </form>
-                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg">
+                            <button href="/use-model" target="_blank" class="btn btn_use_model btn-circled btn-white btn-text rounded-lg btn-size">
                                 <i class="fas fa-camera pr-2 left" aria-hidden="true"></i> Reset
                             </button>
                         </a>
@@ -125,7 +125,7 @@
                                 }
                               }
                             </style>
-                            <p class="glow">PLEASE ONLY INCLUDE LEAVES AFFECTED FOR DIAGNOSIS</p>
+                            <h3 class="text-warning">PLEASE ONLY INCLUDE LEAVES AFFECTED FOR DIAGNOSIS</p>
                         </div>
                     </div>
                 </div>
@@ -133,13 +133,13 @@
                     <div class="" style="grid-area: plant;">
                         {% if not plant_filename == '' %}
                         <!-- <p>{{ url_for('static', filename='uploads/' + plant_filename) }}</p> -->
-                        <img src="{{ url_for('static', filename='uploads/' + plant_filename) }}" width="256" height="256"/>
+                        <img src="{{ url_for('static', filename='uploads/' + plant_filename) }}" width="326" height="326"/>
                         {% endif %}
                     </div>
                     <div class="" style="grid-area: disease;">
                         {% if not disease_filename == '' %}
                         <!-- <p>{{ url_for('static', filename='uploads/' + disease_filename) }}</p> -->
-                        <img src="{{ url_for('static', filename='uploads/' + disease_filename) }}" width="256" height="256"/>
+                        <img src="{{ url_for('static', filename='uploads/' + disease_filename) }}" width="326" height="326"/>
                         {% endif %}
                     </div>
                 </div>
