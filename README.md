@@ -62,7 +62,7 @@ to start the server on local, most changes while developing will be picked up in
 The stats include graphs and matrices of the identification and working diagnosis projects for 10 plants specifically. [Diagnosis Confusion Matrix Folder](https://drive.google.com/drive/folders/1d2rJ411F4MO6CYwUYqsSeXC-8mZteS77?usp=sharing "Diagnosis")
 
 **Identification Confusion Matrix:**
-![](website/app/static/images/confusion_matrixes/confusion_matrix.png)
+![](https://github.com/Plant-Identification-and-Diagnosis-AI/SC22-BatchB-DynamiteDuelers-PlantIdentificationAndDiagnosis/blob/omni_cv/app/static/images/confusion_matrixes/confusion_matrix.png?raw=true)
 
 
 **RoboFlow Stats:**
