@@ -1538,6 +1538,10 @@ CONTACT PAGE
 	position: relative;
 }
 
+.footer-copy p{
+	margin: 0px;
+}
+
 .footer-copy:before {
 	position: absolute;
 	content: "";
