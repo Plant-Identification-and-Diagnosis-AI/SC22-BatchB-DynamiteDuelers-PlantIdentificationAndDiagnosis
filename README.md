@@ -66,11 +66,11 @@ The stats include graphs and matrices of the identification and working diagnosi
 
 
 **RoboFlow Stats:**
-<img src='https://drive.google.com/file/d/1-ZqPY3h-8FhoPP_D7V7TZHch4y5EHOTr/view' width=500px height=450px title='RoboFlow Identification' />
+![](https://drive.google.com/file/d/1-ZqPY3h-8FhoPP_D7V7TZHch4y5EHOTr/view)
 
 
 **Metrics:**
-<img src='https://drive.google.com/file/d/107tEWGt_OMOHuwjRw7E-zh7LgYV_NtWb/view' width=500px height=450px title='Metrics' />
+![](https://github.com/Plant-Identification-and-Diagnosis-AI/SC22-BatchB-DynamiteDuelers-PlantIdentificationAndDiagnosis/blob/omni_cv/app/static/images/results.png?raw=true)
 
 
 ## 😊Thank You!😊
